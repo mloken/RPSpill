@@ -1,0 +1,1 @@
+Kjekt å ha, kjekt å ha
