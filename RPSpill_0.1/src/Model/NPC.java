@@ -2,16 +2,17 @@ package Model;
 
 public class NPC {
 
-	boolean talk;
-	boolean sellItems;
-	boolean buyItems;
+	// Slik jeg tenker det. Åpen for endringer ofc
+	boolean talk; //Om en NPC kan snakke. Si at du klikker en NPC for å snakke. Enten har NPC'en noe å si eller ikke.
+	boolean Merch;
 	boolean hasQuest;
 	
-	public void NPC() {
+	int mapID, posx, posy; //I hvilke(t) og hvor i et map finnes NPC'en.
+	
+	public NPC() {
 		NPC Bent = new NPC();
 		Bent.talk = true;
-		Bent.sellItems = false;
-		Bent.buyItems = false;
+		Bent.Merch = false;
 		Bent.hasQuest = true;
 	}
 	
