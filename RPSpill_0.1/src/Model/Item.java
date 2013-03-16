@@ -21,24 +21,16 @@ public class Item {
 		itemList.toString();
 	}
 	
-	public void createPotion(int ID, String name, int hp, int mp) {
+	public void createPotion(int pID, String name, int hp, int mp) {
 		
 	}
 
-	private void createWeapon(int ID, String name, int str, int dex, int intel, int AtkDmg, int SpellDmg) {
-		item.ID = ID; 
-		item.name = name;
-		item.str = str;
-		item.dex = dex;
-		item.intel = intel;
+	private void createWeapon(int wID, String name, int str, int dex, int intel, int AtkDmg, int SpellDmg) {
+		item.ID = wID; item.name = name;
+		item.str = str;	item.dex = dex;	item.intel = intel;
 		item.AtkDmg = AtkDmg;
 		item.SpellDmg = SpellDmg;
 		item.rLevel = item.rStr = item.rDex = item.rInt = 0;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("yo");
-		Item items = new Item();
-		items.createWeapon(1, "Sword #", 10, 10, 10, 10, 10);
-	}
 }
