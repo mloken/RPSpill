@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Item {
 
-	Item item = new Item();
 	String name = "";
 	int ID;
 	int str, dex, intel, AtkDmg, SpellDmg, hp, mp;
@@ -14,7 +13,6 @@ public class Item {
 	
 	public Item() {
 		int i = 1;
-		System.out.println(i);
 		this.createWeapon(i, "Sword #", 10*i, 10*i, 10*i, 10*i, 10*i);		
 //		itemList.add(this);
 //		itemList.toString();
