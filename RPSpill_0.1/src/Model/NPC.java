@@ -16,9 +16,4 @@ public class NPC {
 		Bent.hasQuest = true;
 	}
 	
-	public static void main(String[] args) {
-		
-	}
-	
-	
 }

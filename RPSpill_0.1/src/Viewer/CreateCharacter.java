@@ -1,18 +1,14 @@
 package Viewer;
 
 import java.util.Scanner;
-import Model.Karakter;
+import Model.Character;
 
 public class CreateCharacter {
 
-	Karakter ch = new Karakter();
+	Character ch = new Character();
 	Scanner sc = new Scanner(System.in);
 	
-	
 	public CreateCharacter() {
-		
-	}
-	public static void main(String[] args) {
 		
 	}
 

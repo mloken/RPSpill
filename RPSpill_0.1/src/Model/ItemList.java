@@ -9,9 +9,5 @@ public class ItemList {
 	
 	// Vi kan ha rarity. Lage en ItemQuality-klasse?
 	// Alle items er av en type. Top/Bottom/Overall, Hat, Shoes, Gloves, cape, wand, sword, 2 handed axe, bow, etc.
-	
-	public static void main(String[] args) {
-		
-	}
 
 }

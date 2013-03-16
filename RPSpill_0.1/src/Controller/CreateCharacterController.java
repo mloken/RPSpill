@@ -9,8 +9,4 @@ public class CreateCharacterController extends AbstractController{
 		String inn = this.waitForInput();
 		System.out.println("" + inn + " is a great name!");
 	}
-	
-	public static void main(String[] args){
-		
-	}
 }
