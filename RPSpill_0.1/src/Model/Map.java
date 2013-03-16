@@ -7,4 +7,8 @@ public class Map {
 	// but if we spawn mobs in all the maps in the game when there are no players there
 	// it might cause the system to run more slowly
 	
+	public Map() {
+		
+	}
+	
 }
