@@ -10,4 +10,7 @@ public class CreateCharacterController extends AbstractController{
 		System.out.println("" + inn + " is a great name!");
 	}
 	
+	public static void main(String[] args){
+		
+	}
 }
