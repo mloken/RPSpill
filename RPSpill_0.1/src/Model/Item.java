@@ -13,12 +13,11 @@ public class Item {
 	ArrayList<Item> itemList = new ArrayList<Item>();
 	
 	public Item() {
-		for (int i = 1; i < 11; i++ ) {
-			System.out.println("" + i);
-			item.createWeapon(i, "Sword #" + i, 10*i, 10*i, 10*i, 10*i, 10*i);		
-			itemList.add(item);
-		}
-		itemList.toString();
+		int i = 1;
+		System.out.println(i);
+		this.createWeapon(i, "Sword #", 10*i, 10*i, 10*i, 10*i, 10*i);		
+//		itemList.add(this);
+//		itemList.toString();
 	}
 	
 	public void createPotion(int pID, String name, int hp, int mp) {
@@ -26,11 +25,11 @@ public class Item {
 	}
 
 	private void createWeapon(int wID, String name, int str, int dex, int intel, int AtkDmg, int SpellDmg) {
-		item.ID = wID; item.name = name;
-		item.str = str;	item.dex = dex;	item.intel = intel;
-		item.AtkDmg = AtkDmg;
-		item.SpellDmg = SpellDmg;
-		item.rLevel = item.rStr = item.rDex = item.rInt = 0;
+		this.ID = wID; this.name = name;
+		this.str = str;	this.dex = dex;	this.intel = intel;
+		this.AtkDmg = AtkDmg;
+		this.SpellDmg = SpellDmg;
+		this.rLevel = this.rStr = this.rDex = this.rInt = 0;
 	}
 	
 }
