@@ -1,7 +1,6 @@
 package Viewer;
 
 import java.util.Scanner;
-import Model.Character;
 
 public class CreateCharacter {
 

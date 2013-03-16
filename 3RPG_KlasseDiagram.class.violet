@@ -195,19 +195,19 @@ portal_location()</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>121.0</double>
+      <double>72.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>331.0</double>
+      <double>336.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>121.0</double>
-     <double>331.0</double>
+     <double>72.0</double>
+     <double>336.0</double>
     </void>
    </object>
   </void>
@@ -488,19 +488,19 @@ exp
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>284.0</double>
+      <double>234.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>487.0</double>
+      <double>490.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>284.0</double>
-     <double>487.0</double>
+     <double>234.0</double>
+     <double>490.0</double>
     </void>
    </object>
   </void>
@@ -647,6 +647,59 @@ kommer tilbake til det
     <void method="setLocation">
      <double>704.0</double>
      <double>239.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode12">
+    <void property="attributes">
+     <void property="text">
+      <string>Damage, melee/magic/range
+Cooldown
+Graphic_Effects
+Status_Effect (poison, burn, ...) % chance
+
+</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>InflictDamage()
+RemoveMana()
+RemoveHealth()
+AddMana()
+AddHealth()
+SetMaxMana() for a duration of time
+SetMaxHealth() for duration of time
+Monster.SetStatus()
+Player.SetStatus()
+</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>Skills</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double16">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double16"/>
+      <double>85.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double16"/>
+      <double>60.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>85.0</double>
+     <double>60.0</double>
     </void>
    </object>
   </void>
@@ -841,6 +894,18 @@ kommer tilbake til det
    </object>
    <object idref="ClassNode9"/>
    <object idref="PackageNode0"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+   </object>
+   <object idref="ClassNode12"/>
+   <object idref="PackageNode2"/>
   </void>
  </object>
 </java>
