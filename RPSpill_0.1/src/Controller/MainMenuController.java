@@ -3,10 +3,6 @@ package Controller;
 import java.io.IOException;
 
 public class MainMenuController {
-	
-	public class CreateCharacterController {
-
-	}
 
 	public static void main(String[] arg) throws Exception {
 		new MainMenuController();
