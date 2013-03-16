@@ -1,11 +1,11 @@
 package Model;
 
-public class Character {
+public class PlayerChar {
 
 	final String charName = "";
 	int level;
 	
-	public Character() {
+	public PlayerChar() {
 		
 	}
 }
