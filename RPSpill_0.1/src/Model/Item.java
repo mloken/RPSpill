@@ -46,15 +46,9 @@ public class Item {
 	}
 	
 	public String printWeapon() {
-		String rClass = this.rClass;
-		int ReqLvl = this.rLevel;
-		int ReqStr = this.rStr;
-		int ReqDex = this.rDex;
-		int ReqInt = this.rInt;
-		int Quality = this.quality;
 		
-		String a = "\n -Requirements-\n Class: " + rClass + "\n Lvl:" + ReqLvl +
-				"\n Str:" + ReqStr + "\n Dex:" + ReqDex + "\n Int:" + ReqInt + 
+		String a = "\n -Requirements-\n Class: " + this.rClass + "\n Lvl:" + this.rLevel +
+				"\n Str:" + this.rStr + "\n Dex:" + this.rDex + "\n Int:" + this.rInt + 
 				"\n Quality:" + this.quality;
 		String s;
 		s = "" + this.name +  a +
