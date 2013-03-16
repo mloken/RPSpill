@@ -2,12 +2,11 @@ package Model;
 
 public class NPC {
 
-	// Slik jeg tenker det. Åpen for endringer ofc
-	boolean talk; //Om en NPC kan snakke. Si at du klikker en NPC for å snakke. Enten har NPC'en noe å si eller ikke.
+	boolean talk; //Can an NPC talk/interact with a player?
 	boolean Merch;
 	boolean hasQuest;
 	
-	int mapID, posx, posy; //I hvilke(t) og hvor i et map finnes NPC'en.
+	int mapID, posx, posy; //In what map and where in the map can an NPC be found?
 	
 	public NPC() {
 		NPC Bent = new NPC();
