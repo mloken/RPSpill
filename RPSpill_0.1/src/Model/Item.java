@@ -12,9 +12,9 @@ public class Item {
 	
 	public Item() throws Exception {
 		
-		JDBC.addItems(createWeapon(0, "Sword #1", "Common", 0, 10, 10, 10, 10, 10, 0, 0, 0, 1));
-//		ItemList.addItem(this.createWeapon(1, "BentSword", "Master", 100, 1000, 1000, 1000, 1000, 1000, 0, 0, 0, 5));
-//		ItemList.addItem(this.createWeapon(2, "Bow", "Ranger", 10, 5, 10, 0, 15, 0, 0, 0, 0, 1));
+		JDBC.addItems(this.createWeapon(0, "Sword #1", "Common", 0, 10, 10, 10, 10, 10, 0, 0, 0, 1));
+		JDBC.addItems(this.createWeapon(1, "BentSword", "Master", 100, 1000, 1000, 1000, 1000, 1000, 0, 0, 0, 5));
+		JDBC.addItems(this.createWeapon(2, "Bow", "Ranger", 10, 5, 10, 0, 15, 0, 0, 0, 0, 1));
 	}
 	
 	public void createPotion(int pID, String name, int hp, int mp) {
@@ -50,9 +50,5 @@ public class Item {
 				+ "\n    Dex: " + this.dex + "\n    Int: " + this.intel  + 
 				"\n       Quality: " + this.quality;
 		return s;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }
