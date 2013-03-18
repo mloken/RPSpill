@@ -1,18 +1,20 @@
 package Model;
 
+import Controller.JDBC;
+
 public class Item {
 
-	String name = "";
-	String rClass = "";
-	int ID;
-	int str, dex, intel, AtkDmg, SpellDmg, hp, mp;
-	int rStr, rDex, rInt, rLevel, quality;
+	public String name = "";
+	public String rClass = "";
+	public int ID;
+	public int str, dex, intel, AtkDmg, SpellDmg, hp, mp;
+	public int rStr, rDex, rInt, rLevel, quality;
 	
-	public Item() {
+	public Item() throws Exception {
 		
-		ItemList.addItem(this.createWeapon(0, "Sword #1", "Common", 0, 10, 10, 10, 10, 10, 0, 0, 0, 1));
-		ItemList.addItem(this.createWeapon(1, "BentSword", "Master", 100, 1000, 1000, 1000, 1000, 1000, 0, 0, 0, 5));
-		ItemList.addItem(this.createWeapon(2, "Bow", "Ranger", 10, 5, 10, 0, 15, 0, 0, 0, 0, 1));
+		JDBC.addItems(createWeapon(0, "Sword #1", "Common", 0, 10, 10, 10, 10, 10, 0, 0, 0, 1));
+//		ItemList.addItem(this.createWeapon(1, "BentSword", "Master", 100, 1000, 1000, 1000, 1000, 1000, 0, 0, 0, 5));
+//		ItemList.addItem(this.createWeapon(2, "Bow", "Ranger", 10, 5, 10, 0, 15, 0, 0, 0, 0, 1));
 	}
 	
 	public void createPotion(int pID, String name, int hp, int mp) {
@@ -50,4 +52,7 @@ public class Item {
 		return s;
 	}
 	
+	public static void main(String[] args) {
+		
+	}
 }
