@@ -70,12 +70,11 @@ public class JDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
 			stmt = conn.createStatement();
-			stmt.executeQuery("use RPGame"); 
 			
 			rs = stmt.executeQuery(query);
 			if (!rs.next())
 				//ResultSet is empty 
-				return false;
+				return false; //Username doesn't exist
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -28,7 +28,7 @@ public class CreateUser {
 			if (u.length() > 12 || u.length() < 4 || u == "") {
 				System.out.println("Username must be between 4 and 12 characters.");
 			}
-			else if (JDBC.UsernameExists(username)) {
+			else if (JDBC.UsernameExists(u)) {
 				System.out.println("Username already exists.");
 			}
 			else if (p.length() > 20 || p.length() < 4 || p == "") {
