@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import model.Item;
 
-
 public class JDBC {
 	
 	static Connection conn = null;
@@ -26,23 +25,18 @@ public class JDBC {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?"
 							+ "user=bent&password=bentpw");
 			
-//			(id, name, class, rLevel, str, dex, intel, AtkDmg, SpellDmg, rStr, rDex, rInt, quality);
-			
 			stmt = conn.createStatement();
 			stmt.executeQuery("use RPGame"); 
-			// Bytt ut * med RPGame => ???
-//			stmt.executeQuery("GRANT usage ON * to bent identified by 'bentpw'");
-//			stmt.executeQuery("GRANT ALL privileges ON RPGame.* TO bent@localhost;");
 			
-			//Kan bruke stmt.executeUpdate(String), men ser på String query og stmt.executeUpdate(query);
-			String query = "INSERT INTO items VALUES ( '" + item.ID + "', '" + item.name + "', '" + item.rClass + "', " +
-					"'" + item.rLevel + "', '" + item.str + "', '" + item.dex + "', '" + item.intel + "', '" + item.AtkDmg + "', '"
-					+ item.SpellDmg + "', '" + item.rStr + "', '" + item.rDex + "', '" +  item.rInt + "', '" + item.quality + "')";
+			String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', '" + item.rClass + "', " +
+					"'" + item.type + "', '" + item.level + "' , '" + item.str + "', '" + item.dex + "'," +
+							" '" + item.intel + "', '" + item.AtkDmg + "', '"+ item.quality + "');";
+			System.out.println(query);
 			stmt.executeUpdate(query);
-			System.out.println("Item # " + item.ID + " was added to table items in database RPGame.");
+			System.out.println("Item added");
 			// PreparedStatements can use variables and are more efficient
 			
-			prepStmt = conn.prepareStatement("Select * from items");
+			prepStmt = conn.prepareStatement("Select * from weapon");
 			prepStmt.executeQuery();
 			
 //			prepStmt = conn.prepareStatement("delete from testTable ");
