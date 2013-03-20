@@ -2,16 +2,33 @@ package controller;
 
 import java.io.IOException;
 
-public class MainMenuController {
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+public class MainMenuController extends JFrame{
 
 	public static void main(String[] arg) throws Exception {
-		new MainMenuController();
+		SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                MainMenuController mmc;
+				try {
+					mmc = new MainMenuController();
+					mmc.setVisible(true);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
+            }
+        });
 	}
 	
 	public MainMenuController() throws IOException{
-		System.out.println("Welcome to RP-game");
-		System.out.println("Please create character");
-		new CreateCharacterController();
+		setTitle("Main Menu");
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		new CreateCharacterController();
 	}
 	
 }
