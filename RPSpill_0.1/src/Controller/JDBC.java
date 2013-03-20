@@ -103,6 +103,9 @@ public class JDBC {
 		return true;
 	}
 	
+	public static boolean logIn(String username, String password) {
+		return true;
+	}
 	// You need to close the resultSet
 	public static void close() {
 		try {

@@ -42,10 +42,10 @@ public class CreateUser {
 		this.p = p;
 	}
 
-	public static void main(String[] args) {
-		CreateUser user = new CreateUser();
-		JDBC.addUser(user);
-		JDBC.close();
-		
-	}
+//	public static void main(String[] args) {
+//		CreateUser user = new CreateUser();
+//		JDBC.addUser(user);
+//		JDBC.close();
+//	}
+	
 }

@@ -2,6 +2,7 @@ package model;
 
 public class PlayerChar {
 
+	final String owner = "";
 	final String charName = "";
 	final String charClass = ""; //Dette burde kanskje være et objekt av typen charClass (som vi må opprette. enig/uenig?)
 	int level, hp, mp, exp;
