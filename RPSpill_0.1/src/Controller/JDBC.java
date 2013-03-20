@@ -13,6 +13,10 @@ import model.Item;
 public class JDBC {
 
 	public static void addItems(Item item) throws Exception {
+		if (existingWeapon(item)) {
+			System.out.println("Item already exists.");
+			return;
+		}
 		String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', '" + item.rClass + "', " +
 				"'" + item.type + "', '" + item.level + "' , '" + item.str + "', '" + item.dex + "'," +
 				" '" + item.intel + "', '" + item.AtkDmg + "', '"+ item.quality + "');";
@@ -34,7 +38,6 @@ public class JDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-
 	}
 	
 	public static boolean existingWeapon(Item item) {
@@ -47,7 +50,8 @@ public class JDBC {
 			stmt.executeQuery("use RPGame"); 
 			
 			rs = stmt.executeQuery(query);
-			if (rs == null) {
+			while (!rs.next()) {
+				
 				return false;
 			}
 
