@@ -11,15 +11,11 @@ import java.util.ArrayList;
 import model.Item;
 
 public class JDBC {
-	
-	static Connection conn = null;
-	static Statement stmt = null;
-	static PreparedStatement prepStmt = null;
-	static ResultSet rs = null;
-	
-	ArrayList<Item> items = new ArrayList<Item>();
 
 	public static void addItems(Item item) throws Exception {
+		String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', '" + item.rClass + "', " +
+				"'" + item.type + "', '" + item.level + "' , '" + item.str + "', '" + item.dex + "'," +
+				" '" + item.intel + "', '" + item.AtkDmg + "', '"+ item.quality + "');";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?"
@@ -28,29 +24,85 @@ public class JDBC {
 			stmt = conn.createStatement();
 			stmt.executeQuery("use RPGame"); 
 			
-			String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', '" + item.rClass + "', " +
-					"'" + item.type + "', '" + item.level + "' , '" + item.str + "', '" + item.dex + "'," +
-							" '" + item.intel + "', '" + item.AtkDmg + "', '"+ item.quality + "');";
-			System.out.println(query);
 			stmt.executeUpdate(query);
 			System.out.println("Item added");
 			// PreparedStatements can use variables and are more efficient
 			
 			prepStmt = conn.prepareStatement("Select * from weapon");
 			prepStmt.executeQuery();
-			
-//			prepStmt = conn.prepareStatement("delete from testTable ");
-//			prepStmt.executeUpdate();
-
-//			rs = stmt.executeQuery("select * from testTable");
-//			writeMetaData(resultSet);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
 
 	}
+	
+	public static boolean existingWeapon(Item item) {
+		String query = "SELECT name FROM weapon WHERE weapon.name = '" + item.name + "'";
+		try {
+			ResultSet rs = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			rs = stmt.executeQuery(query);
+			if (rs == null) {
+				return false;
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return true;
+	}
+
+	public static boolean existingUsername(String username) {
+		String query = "SELECT username FROM karakter WHERE karakter.usename = '" + username + "'";
+		try {
+			ResultSet rs = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			rs = stmt.executeQuery(query);
+			if (rs == null) {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return true;
+	}
+	
+	public static void addUser(CreateUser user) {
+
+		String query = "UPDATE karakter SET (null, '" + user.username + "', '" + user.password + "', null)";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			stmt.executeUpdate(query);
+			System.out.println("User added");
+			// PreparedStatements can use variables and are more efficient
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	// You need to close the resultSet
 	private static void close() {
 		try {
@@ -69,4 +121,17 @@ public class JDBC {
 			e.printStackTrace();
 		}
 	}
+
+	
+	
+	
+	
+	
+	
+	static Connection conn = null;
+	static Statement stmt = null;
+	static PreparedStatement prepStmt = null;
+	static ResultSet rs = null;
+	ArrayList<Item> items = new ArrayList<Item>();
+
 }

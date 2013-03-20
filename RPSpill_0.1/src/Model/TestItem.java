@@ -7,6 +7,7 @@ public class TestItem {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		@SuppressWarnings("unused")
 		Item item = new Item();
 	}
 
