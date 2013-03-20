@@ -63,6 +63,25 @@ public class JDBC {
 		return true;
 	}
 
+	public static void addUser(CreateUser user) {
+		String query = "INSERT INTO user VALUES (null, '" + user.u + "', '" + user.p + "', '0')";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			stmt.executeUpdate(query);
+			System.out.println("\nUser '" + user.u + "' created.\n");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 	public static boolean UsernameExists(String username) {
 		String query = "SELECT username FROM user WHERE user.username = '" + username + "'";
 		try {
@@ -84,26 +103,8 @@ public class JDBC {
 		return true;
 	}
 	
-	public static void addUser(CreateUser user) {
-		String query = "INSERT INTO user VALUES (null, '" + user.u + "', '" + user.p + "', '0')";
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
-			stmt = conn.createStatement();
-			stmt.executeQuery("use RPGame"); 
-			
-			stmt.executeUpdate(query);
-			System.out.println("\nUser '" + user.u + "' created.\n");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	}
 	// You need to close the resultSet
-	private static void close() {
+	public static void close() {
 		try {
 			if (rs != null) {
 				rs.close();
