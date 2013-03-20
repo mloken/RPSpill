@@ -1,4 +1,4 @@
-package Viewer;
+package view;
 
 public class CharStats {
 

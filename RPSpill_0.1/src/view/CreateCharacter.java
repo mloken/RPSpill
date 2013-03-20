@@ -1,8 +1,9 @@
-package Viewer;
+package view;
 
 import java.util.Scanner;
 
-import Model.PlayerChar;
+import model.PlayerChar;
+
 
 public class CreateCharacter {
 

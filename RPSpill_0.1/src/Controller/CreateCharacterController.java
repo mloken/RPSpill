@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
 
@@ -7,7 +7,6 @@ public class CreateCharacterController extends AbstractController{
 	public CreateCharacterController() throws IOException{
 		System.out.print("Choose name: ");
 		String inn = this.waitForInput();
-		//Restrictions
 		System.out.println("" + inn + " is a great name!");
 	}
 }

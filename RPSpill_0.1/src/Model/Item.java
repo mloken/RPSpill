@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Controller.JDBC;
+import controller.JDBC;
 
 public class Item {
 
