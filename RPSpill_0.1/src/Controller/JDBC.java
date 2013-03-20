@@ -13,6 +13,7 @@ import model.Item;
 public class JDBC {
 
 	public static void addItems(Item item) throws Exception {
+		System.out.println("Adding item...");
 		if (existingWeapon(item)) {
 			System.out.println("Item already exists.");
 			return;
@@ -50,10 +51,8 @@ public class JDBC {
 			stmt.executeQuery("use RPGame"); 
 			
 			rs = stmt.executeQuery(query);
-			while (!rs.next()) {
-				
+			if (!rs.next()) 
 				return false;
-			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,8 +63,8 @@ public class JDBC {
 		return true;
 	}
 
-	public static boolean existingUsername(String username) {
-		String query = "SELECT username FROM karakter WHERE karakter.usename = '" + username + "'";
+	public static boolean UsernameExists(String username) {
+		String query = "SELECT username FROM user WHERE user.username = '" + username + "'";
 		try {
 			ResultSet rs = null;
 			Class.forName("com.mysql.jdbc.Driver");
@@ -74,22 +73,20 @@ public class JDBC {
 			stmt.executeQuery("use RPGame"); 
 			
 			rs = stmt.executeQuery(query);
-			if (rs == null) {
+			if (!rs.next())
+				//ResultSet is empty 
 				return false;
-			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return true;
 	}
 	
 	public static void addUser(CreateUser user) {
-
-		String query = "UPDATE karakter SET (null, '" + user.username + "', '" + user.password + "', null)";
+		String query = "INSERT INTO user VALUES (null, '" + user.u + "', '" + user.p + "', '0')";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
@@ -97,8 +94,7 @@ public class JDBC {
 			stmt.executeQuery("use RPGame"); 
 			
 			stmt.executeUpdate(query);
-			System.out.println("User added");
-			// PreparedStatements can use variables and are more efficient
+			System.out.println("\nUser '" + user.u + "' created.\n");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
