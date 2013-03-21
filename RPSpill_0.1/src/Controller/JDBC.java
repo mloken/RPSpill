@@ -107,16 +107,38 @@ public class JDBC {
 		return true;
 	}
 	// You need to close the resultSet
+	
+
+	public static void createCharacter(String owner, String username) {
+		String query = "INSERT INTO karakter values(null, '" + owner + "', '" + username + "', '" +
+			"1', '0', '100', '100', '1', '1', '1')";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			stmt.executeUpdate(query);
+			System.out.println("\nCharacter '" + username + "' created.\n");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 	public static void close() {
 		try {
 			if (rs != null) {
 				rs.close();
 			}
-
+			
 			if (stmt != null) {
 				stmt.close();
 			}
-
+			
 			if (conn != null) {
 				conn.close();
 			}
@@ -124,8 +146,6 @@ public class JDBC {
 			e.printStackTrace();
 		}
 	}
-
-	
 	
 	static Connection conn = null;
 	static Statement stmt = null;
