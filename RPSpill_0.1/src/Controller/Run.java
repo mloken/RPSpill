@@ -53,12 +53,12 @@ public class Run {
 		if (isInt(number))
 			x = Integer.parseInt(number);
 
+		charList = JDBC.characterList(owner);
+		System.out.println(charList);
 		switch (x) {
 		case 1:
 			charList = new ArrayList<String>();
 			System.out.println("Please choose your character from the list below: ");
-			charList = JDBC.characterList(owner);
-			System.out.println(charList);
 			System.out.print("Character number: ");
 			int a = sc.nextInt();
 			break;
@@ -67,7 +67,6 @@ public class Run {
 			break;
 		case 3:
 			System.out.println("Which character do you want to delete?");
-			System.out.println(charList);
 			System.out.print("Character number: ");
 			String b = sc.nextLine();
 			if (isInt(b))
