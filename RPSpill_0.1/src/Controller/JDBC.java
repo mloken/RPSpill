@@ -104,6 +104,24 @@ public class JDBC {
 	}
 	
 	public static boolean logIn(String username, String password) {
+		String query = "SELECT username FROM user WHERE user.username = '" + username + "' " +
+				"AND user.password = '" + password + "'";
+		try {
+			ResultSet rs = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(query);
+			if (!rs.next())
+				//ResultSet is empty 
+				return false; //Username/Password doesn't exist/is wrong
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
 		return true;
 	}
 	// You need to close the resultSet
