@@ -12,8 +12,8 @@ public class Run {
 		System.out.print("Username: ");
 		owner = sc.nextLine();
 		System.out.print("Password: ");
-		p = sc.nextLine();
-		boolean a = (JDBC.logIn(owner, p)) ? true : false;
+		String p = sc.nextLine();
+		boolean a = (JDBC.logIn(owner, p));
 		if (!a) {
 			System.out.println("Wrong username or password.");
 			return;

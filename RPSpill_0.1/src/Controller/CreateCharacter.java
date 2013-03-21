@@ -12,6 +12,7 @@ public class CreateCharacter {
 			System.out.print("\nPlease enter your desired Character name: ");
 			u = sc.nextLine();
 			u = u.toLowerCase().trim();
+
 			if (JDBC.existingCharacterName(u)) 
 				System.out.println("Character name already exists.");
 			else if (u.length() > 12 || u.length() < 4) 
