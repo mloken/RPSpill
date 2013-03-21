@@ -35,7 +35,6 @@ public class Run {
 				System.out.println("Invalid input.");
 			}
 		} while (!b);
-		System.out.println(x);
 		if (x == 2) 
 			new CreateCharacter();
 	}

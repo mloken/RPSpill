@@ -111,8 +111,7 @@ public class JDBC {
 			
 			rs = stmt.executeQuery(q);
 			if (!rs.next())
-				//ResultSet is empty 
-				return false; //Name doesn't exist
+				return false; 
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,6 +140,31 @@ public class JDBC {
 				conn.close();
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	public static void characterList(String owner) {
+		String query = "SELECT name FROM karakter WHERE karakter.user_owner = '"
+				+ owner + "'";
+		try {
+			ResultSet rs = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while (rs.next()) {
+				System.out.println(rs.getString(i));
+				i++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
