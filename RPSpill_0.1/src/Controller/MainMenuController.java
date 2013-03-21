@@ -22,7 +22,6 @@ public class MainMenuController extends JFrame{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                
             }
         });
 	}
@@ -40,7 +39,7 @@ public class MainMenuController extends JFrame{
 	       panel.setLayout(null);
 
 	       JButton playButton = new JButton("Play");
-	       playButton.setBounds(360, 60, 80, 30);
+	       playButton.setBounds(250, 60, 300, 100);
 	       playButton.addActionListener(new ActionListener() {
 	           public void actionPerformed(ActionEvent event) {
 	               try {
@@ -54,7 +53,7 @@ public class MainMenuController extends JFrame{
 	       panel.add(playButton);
 	       
 	       JButton quitButton = new JButton("Quit");
-	       quitButton.setBounds(360, 100, 80, 30);
+	       quitButton.setBounds(250, 200, 300, 100);
 	       quitButton.addActionListener(new ActionListener() {
 	           public void actionPerformed(ActionEvent event) {
 	               System.exit(0);
