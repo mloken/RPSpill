@@ -11,14 +11,13 @@ public class Run {
 		String u = sc.nextLine();
 		System.out.print("Password: ");
 		String p = sc.nextLine();
-		boolean a = (JDBC.logIn(u, p)) ? true : false;
+		boolean a = (JDBC.logIn(u, p));
 		if (!a) {
 			System.out.println("Wrong username or password.");
 			return;
 		}
 		System.out.println("Press 1 to create a character.");
 		System.out.println("Press 2 to choose existing character.");
-		System.out.println("Press 3 to go fuck yourself.");
 		boolean b;
 		int x = 0;
 		do {
