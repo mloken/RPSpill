@@ -18,6 +18,24 @@ public class JDBC {
 	static ResultSet rs = null;
 	ArrayList<Item> items = new ArrayList<Item>();
 
+	public static void close() {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			
+			if (stmt != null) {
+				stmt.close();
+			}
+			
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void addItems(Item item) throws Exception {
 		System.out.println("Adding item...");
 		if (existingWeapon(item)) {
@@ -126,28 +144,10 @@ public class JDBC {
 		return (tryCatch(query));
 }
 	
-	public static void close() {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-			
-			if (stmt != null) {
-				stmt.close();
-			}
-			
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
-	public static void characterList(String owner) {
+	public static ArrayList<String> characterList(String owner) {
 		String query = "SELECT name FROM karakter WHERE karakter.user_owner = '"
-				+ owner + "'";
+				+ owner + "' GROUP BY id";
+		ArrayList<String> list = new ArrayList<String>();
 		try {
 			ResultSet rs = null;
 			Class.forName("com.mysql.jdbc.Driver");
@@ -156,10 +156,8 @@ public class JDBC {
 			stmt = conn.createStatement();
 
 			rs = stmt.executeQuery(query);
-			int i = 0;
 			while (rs.next()) {
-				System.out.println(rs.getString(i));
-				i++;
+				list.add(rs.getString("name"));
 			}
 
 		} catch (SQLException e) {
@@ -167,6 +165,13 @@ public class JDBC {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return list;
+	}
+
+	
+	public static boolean deleteCharacter(String name) {
+		String query = "DELETE FROM karakter WHERE name = '" + name + "'";
+		return (tryCatch(query));
 	}
 	
 	
