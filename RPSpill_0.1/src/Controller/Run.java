@@ -46,6 +46,7 @@ public class Run {
 		System.out.println("Press 1 to choose existing character.");
 		System.out.println("Press 2 to create a character.");
 		System.out.println("Press 3 to delete a character.");
+		System.out.println("Press 4 to see your characters.");
 
 		int x = 0;
 		sc = new Scanner(System.in);
@@ -53,14 +54,14 @@ public class Run {
 		if (isInt(number))
 			x = Integer.parseInt(number);
 
-		charList = JDBC.characterList(owner);
-		System.out.println(charList);
+		
 		switch (x) {
 		case 1:
 			charList = new ArrayList<String>();
 			System.out.println("Please choose your character from the list below: ");
 			System.out.print("Character number: ");
 			int a = sc.nextInt();
+//			String name = charList.get(a);
 			break;
 		case 2:
 			new CreateCharacter();
@@ -71,14 +72,14 @@ public class Run {
 			String b = sc.nextLine();
 			if (isInt(b))
 				c = Integer.parseInt(b);
-			if (JDBC.deleteCharacter(charList.get(c)))
-				System.out.println("Character was deleted successfully." );
-			else
-				System.out.println("no");
+			if (c<1)
+				System.exit(0);
+			JDBC.deleteCharacter(charList.get(c-1));
+		case 4:
+			charList = JDBC.characterList(owner);
+			System.out.println(charList);
 		default:
 			break;
 		} 
-			
 	}
-
 }

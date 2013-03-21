@@ -71,7 +71,7 @@ public class JDBC {
 	}
 
 	public static void addUser(CreateUser user) {
-		String query = "INSERT INTO user VALUES (null, '" + user.u + "', '" + user.p + "', '0')";
+		String query = "INSERT INTO user VALUES (null, '" + user.u + "', '" + user.p + "')";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
@@ -169,9 +169,23 @@ public class JDBC {
 	}
 
 	
-	public static boolean deleteCharacter(String name) {
+	public static void deleteCharacter(String name) {
 		String query = "DELETE FROM karakter WHERE name = '" + name + "'";
-		return (tryCatch(query));
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			stmt.executeUpdate(query);
+			System.out.println("\nCharacter '" + name + "' deleted.\n");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	
