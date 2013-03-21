@@ -19,8 +19,9 @@ public class Run {
 			return;
 		}
 		System.out.println("Logged in as: " + owner.toLowerCase());
-		System.out.println("Press 1 to create a character.");
-		System.out.println("Press 2 to choose existing character.");
+		System.out.println("Press 1 to choose existing character.");
+		System.out.println("Press 2 to create a character.");
+		System.out.println("Press 3 to delete a character.");
 		boolean b;
 		int x = 0;
 		do {
@@ -35,6 +36,8 @@ public class Run {
 			}
 		} while (!b);
 		System.out.println(x);
+		if (x == 2) 
+			new CreateCharacter();
 	}
 
 }

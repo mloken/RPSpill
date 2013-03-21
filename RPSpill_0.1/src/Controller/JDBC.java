@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import model.Item;
 
 public class JDBC {
+	
+	static Connection conn = null;
+	static Statement stmt = null;
+	static PreparedStatement prepStmt = null;
+	static ResultSet rs = null;
+	ArrayList<Item> items = new ArrayList<Item>();
 
 	public static void addItems(Item item) throws Exception {
 		System.out.println("Adding item...");
@@ -43,24 +49,7 @@ public class JDBC {
 	
 	public static boolean existingWeapon(Item item) {
 		String query = "SELECT name FROM weapon WHERE weapon.name = '" + item.name + "'";
-		try {
-			ResultSet rs = null;
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
-			stmt = conn.createStatement();
-			stmt.executeQuery("use RPGame"); 
-			
-			rs = stmt.executeQuery(query);
-			if (!rs.next()) 
-				return false;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		return true;
+		return tryCatch(query);
 	}
 
 	public static void addUser(CreateUser user) {
@@ -82,50 +71,16 @@ public class JDBC {
 		} 
 	}
 	
-	public static boolean UsernameExists(String username) {
+	public static boolean existingUsername(String username) {
 		String query = "SELECT username FROM user WHERE user.username = '" + username + "'";
-		try {
-			ResultSet rs = null;
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
-			stmt = conn.createStatement();
-			
-			rs = stmt.executeQuery(query);
-			if (!rs.next())
-				//ResultSet is empty 
-				return false; //Username doesn't exist
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} 
-		return true;
+		return tryCatch(query);
 	}
 	
 	public static boolean logIn(String username, String password) {
 		String query = "SELECT username FROM user WHERE user.username = '" + username + "' " +
 				"AND user.password = '" + password + "'";
-		try {
-			ResultSet rs = null;
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
-			stmt = conn.createStatement();
-			
-			rs = stmt.executeQuery(query);
-			if (!rs.next())
-				//ResultSet is empty 
-				return false; //Username/Password doesn't exist/is wrong
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} 
-		return true;
+		return tryCatch(query);
 	}
-	// You need to close the resultSet
-	
 
 	public static void createCharacter(String owner, String username) {
 		String query = "INSERT INTO karakter values(null, '" + owner + "', '" + username + "', '" +
@@ -147,6 +102,31 @@ public class JDBC {
 		} 
 	}
 	
+	public static boolean tryCatch(String q) {
+		try {
+			ResultSet rs = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(q);
+			if (!rs.next())
+				//ResultSet is empty 
+				return false; //Name doesn't exist
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		return true;
+	}
+	
+	public static boolean existingCharacterName(String u) {
+		String query = "SELECT name FROM karakter WHERE karakter.name = '" + u + "'";
+		return (tryCatch(query));
+}
+	
 	public static void close() {
 		try {
 			if (rs != null) {
@@ -165,10 +145,6 @@ public class JDBC {
 		}
 	}
 	
-	static Connection conn = null;
-	static Statement stmt = null;
-	static PreparedStatement prepStmt = null;
-	static ResultSet rs = null;
-	ArrayList<Item> items = new ArrayList<Item>();
+	
 
 }
