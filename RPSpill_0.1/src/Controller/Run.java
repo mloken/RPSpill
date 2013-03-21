@@ -18,7 +18,6 @@ public class Run {
 		}
 		System.out.println("Press 1 to create a character.");
 		System.out.println("Press 2 to choose existing character.");
-		System.out.println("Press 3 to go fuck yourself.");
 		boolean b;
 		int x = 0;
 		do {

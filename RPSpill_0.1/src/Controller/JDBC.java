@@ -18,9 +18,9 @@ public class JDBC {
 			System.out.println("Item already exists.");
 			return;
 		}
-		String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', '" + item.rClass + "', " +
+		String query = "INSERT INTO weapon VALUES (null, '" + item.name + "', " +
 				"'" + item.type + "', '" + item.level + "' , '" + item.str + "', '" + item.dex + "'," +
-				" '" + item.intel + "', '" + item.AtkDmg + "', '"+ item.quality + "');";
+				" '" + item.intel + "', '" + item.dmg + "', '"+ item.quality + "');";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?"
@@ -125,10 +125,6 @@ public class JDBC {
 		}
 	}
 
-	
-	
-	
-	
 	
 	
 	static Connection conn = null;
