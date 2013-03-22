@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Item;
+import model.Monsters;
+import model.Skills;
 
 public class JDBC {
 	
@@ -119,6 +121,30 @@ public class JDBC {
 			e.printStackTrace();
 		} 
 	}
+
+	public static boolean existingCharacterName(String u) {
+		String query = "SELECT name FROM karakter WHERE karakter.name = '" + u + "'";
+		return (tryCatch(query));
+	}
+	
+	public static void deleteCharacter(String name) {
+		String query = "DELETE FROM karakter WHERE name = '" + name + "'";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+			stmt = conn.createStatement();
+			stmt.executeQuery("use RPGame"); 
+			
+			stmt.executeUpdate(query);
+			System.out.println("\nCharacter '" + name + "' deleted.\n");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	
 	public static boolean tryCatch(String q) {
 		try {
@@ -138,11 +164,6 @@ public class JDBC {
 		} 
 		return true;
 	}
-	
-	public static boolean existingCharacterName(String u) {
-		String query = "SELECT name FROM karakter WHERE karakter.name = '" + u + "'";
-		return (tryCatch(query));
-}
 	
 	public static ArrayList<String> characterList(String owner) {
 		String query = "SELECT name FROM karakter WHERE karakter.user_owner = '"
@@ -168,25 +189,62 @@ public class JDBC {
 		return list;
 	}
 
-	
-	public static void deleteCharacter(String name) {
-		String query = "DELETE FROM karakter WHERE name = '" + name + "'";
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
-			stmt = conn.createStatement();
-			stmt.executeQuery("use RPGame"); 
-			
-			stmt.executeUpdate(query);
-			System.out.println("\nCharacter '" + name + "' deleted.\n");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+	public static void createMonster(Monsters mon) {
+		String query = "INSERT INTO monster values(null, '" + mon.name + "', '" + mon.level + "', '" +
+				mon.hp + "', '" + mon.mp + "', '" + mon.armour + "', '" + mon.expReward + "')";
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+				stmt = conn.createStatement();
+				stmt.executeQuery("use RPGame"); 
+				
+				stmt.executeUpdate(query);
+				System.out.println("\nCharacter '" + mon.name + "' created.\n");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 	}
+
+
+	public static boolean existingMonster(String name) {
+		String query = "SELECT name FROM monster WHERE monster.name = '" + name + "'";
+		return tryCatch(query);
+	}
+	
+	public static void createSkills(Skills skill) {
+		if (existingSkill(skill.name)) {
+			System.out.println("Skill already exists.");
+			return;
+		}
+		String query = "INSERT INTO monster values(null, '" + skill.name + "', '" + skill.dmg + "')";
+		try {		Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+				stmt = conn.createStatement();
+				stmt.executeQuery("use RPGame"); 
+				
+				stmt.executeUpdate(query);
+				System.out.println("\nSkill '" + skill.name + "' created.\n");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	}
+	
+	public static boolean existingSkill(String name) {
+		String query = "SELECT name FROM skills WHERE skills.name = '" + name + "'";
+		return tryCatch(query);
+	}
+
+		// TODO Auto-generated method stub
+		
+	
 	
 	
 
