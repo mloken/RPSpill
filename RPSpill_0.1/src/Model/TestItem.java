@@ -9,8 +9,8 @@ public class TestItem {
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		Item item = new Item();
-		new Skills();
-		new Monsters();
+//		new Skills();
+//		new Monsters();
 	}
 
 }

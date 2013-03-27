@@ -7,6 +7,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+import bent.Area;
+import bent.Wall;
+
+import model.Monsters;
+import model.PlayerChar;
+
 
 public class Board extends JPanel { 
 
@@ -17,26 +23,26 @@ public class Board extends JPanel {
     private final int TOP_COLLISION = 3;
     private final int BOTTOM_COLLISION = 4;
 
-    private ArrayList walls = new ArrayList();
-    private ArrayList baggs = new ArrayList();
-    private ArrayList areas = new ArrayList();
-//    private Player soko;
-    private int w = 0;
-    private int h = 0;
+    private ArrayList<Wall> walls = new ArrayList<Wall>();
+    private ArrayList<Monsters> mobs = new ArrayList<Monsters>();
+    private ArrayList<Area> areas = new ArrayList<Area>();
+    private PlayerChar karakter;
+    
+    private int w = 21;
+    private int h = 9;
     private boolean completed = false;
     
     private String level =
-              "######\n"
-            + "##   #\n"
-            + "##$  #\n"
-            + "####  ##\n"
-            + "##    #\n"
-            + "#### # ## #   ######\n"
-            + "##   # ## #####  ..#\n"
-            + "## $  $          ..#\n"
-            + "###### ### #@##  ..#\n"
-            + "    ##     #########\n"
-            + "    ########\n";
+              "#####################\n" +
+              "#                   #\n" +
+              "#                   #\n" +
+              "# @                 #\n" +
+              "#             $     #\n" +
+              "#                   #\n" +
+              "#                   #\n" +
+              "#                   #\n" +
+              "#####################\n";
+              
 
     public Board() {
 
@@ -54,7 +60,11 @@ public class Board extends JPanel {
     }
 
     public final void initWorld() {
-        
+
+    	 Wall wall;
+         Monsters b;
+         Area a;
+
         int x = OFFSET;
         int y = OFFSET;
         
@@ -72,17 +82,17 @@ public class Board extends JPanel {
             } else if (item == '#') {
                 wall = new Wall(x, y);
                 walls.add(wall);
-                x += SPA CE;
+                x += SPACE;
             } else if (item == '$') {
-                b = new Baggage(x, y);
-                baggs.add(b);
+                b = new Monsters(x, y);
+                mobs.add(b);
                 x += SPACE;
             } else if (item == '.') {
                 a = new Area(x, y);
                 areas.add(a);
                 x += SPACE;
             } else if (item == '@') {
-                soko = new Player(x, y);
+                karakter = new PlayerChar(x, y);
                 x += SPACE;
             } else if (item == ' ') {
                 x += SPACE;
@@ -97,22 +107,22 @@ public class Board extends JPanel {
         g.setColor(new Color(250, 240, 170));
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-        ArrayList world = new ArrayList();
+        ArrayList<Object> world = new ArrayList<Object>();
         world.addAll(walls);
         world.addAll(areas);
-        world.addAll(baggs);
-        world.add(soko);
+        world.addAll(mobs);
+        world.add(karakter);
 
         for (int i = 0; i < world.size(); i++) {
 
-            Actor item = (Actor) world.get(i);
-
-            if ((item instanceof Player)
-                    || (item instanceof Baggage)) {
-                g.drawImage(item.getImage(), item.x() + 2, item.y() + 2, this);
-            } else {
-                g.drawImage(item.getImage(), item.x(), item.y(), this);
-            }
+//            PlayerChar item = (PlayerChar) world.get(i);
+//
+//            if ((item instanceof )
+//                    || (item instanceof Monsters)) {
+//                g.drawImage(item.getImage(), item.posx() + 2, item.posy() + 2, this);
+//            } else {
+//                g.drawImage(item.getImage(), item.posx(), item.posy(), this);
+//            }
 
             if (completed) {
                 g.setColor(new Color(0, 0, 0));
@@ -142,65 +152,66 @@ public class Board extends JPanel {
 
 
             if (key == KeyEvent.VK_LEFT) {
-                if (checkWallCollision(soko,
+                if (checkWallCollision(karakter,
                         LEFT_COLLISION)) {
                     return;
                 }
 
-                if (checkBagCollision(LEFT_COLLISION)) {
-                    return;
-                }
+//                if (checkMonsterCollision(LEFT_COLLISION)) {
+//                    return;
+//                }
 
-                soko.move(-SPACE, 0);
+                karakter.move(-SPACE, 0);
 
             } else if (key == KeyEvent.VK_RIGHT) {
 
-                if (checkWallCollision(soko,
+                if (checkWallCollision(karakter,
                         RIGHT_COLLISION)) {
                     return;
                 }
 
-                if (checkBagCollision(RIGHT_COLLISION)) {
-                    return;
-                }
+//                if (checkMonsterCollision(RIGHT_COLLISION)) {
+//                    return;
+//                }
 
-                soko.move(SPACE, 0);
+                karakter.move(SPACE, 0);
 
             } else if (key == KeyEvent.VK_UP) {
 
-                if (checkWallCollision(soko,
+                if (checkWallCollision(karakter,
                         TOP_COLLISION)) {
                     return;
                 }
 
-                if (checkBagCollision(TOP_COLLISION)) {
-                    return;
-                }
+//                if (checkMonsterCollision(TOP_COLLISION)) {
+//                    return;
+//                }
 
-                soko.move(0, -SPACE);
+                karakter.move(0, -SPACE);
 
             } else if (key == KeyEvent.VK_DOWN) {
 
-                if (checkWallCollision(soko,
+                if (checkWallCollision(karakter,
                         BOTTOM_COLLISION)) {
                     return;
                 }
 
-                if (checkBagCollision(BOTTOM_COLLISION)) {
-                    return;
-                }
+//                if (checkMonsterCollision(BOTTOM_COLLISION)) {
+//                    return;
+//                }
 
-                soko.move(0, SPACE);
+                karakter.move(0, SPACE);
 
-            } else if (key == KeyEvent.VK_R) {
-                restartLevel();
+//            } else if (key == KeyEvent.VK_R) {
+//                restartLevel();
+//            }
             }
 
             repaint();
         }
     }
 
-    private boolean checkWallCollision(Actor actor, int type) {
+    private boolean checkWallCollision(PlayerChar actor, int type) {
 
         if (type == LEFT_COLLISION) {
 
@@ -245,143 +256,118 @@ public class Board extends JPanel {
         return false;
     }
 
-    private boolean checkBagCollision(int type) {
+//    private boolean checkMonsterCollision(int type) {
+//
+//        if (type == LEFT_COLLISION) {
+//
+//            for (int i = 0; i < mobs.size(); i++) {
+//
+//                Monsters bag = (Monsters) mobs.get(i);
+//                if (karakter.isLeftCollision(bag)) {
+//
+//                    for (int j=0; j < mobs.size(); j++) {
+//                        Monsters item = (Monsters) mobs.get(j);
+//                        if (!bag.equals(item)) {
+//                            if (bag.isLeftCollision(item)) {
+//                                return true;
+//                            }
+//                        }
+//                        if (checkWallCollision(bag,
+//                                LEFT_COLLISION)) {
+//                            return true;
+//                        }
+//                    }
+//                    bag.move(-SPACE, 0);
+//                }
+//            }
+//            return false;
+//
+//        } else if (type == RIGHT_COLLISION) {
+//
+//            for (int i = 0; i < mobs.size(); i++) {
+//
+//                Monsters bag = (Monsters) mobs.get(i);
+//                if (karakter.isRightCollision(bag)) {
+//                    for (int j=0; j < mobs.size(); j++) {
+//
+//                        Monsters item = (Monsters) mobs.get(j);
+//                        if (!bag.equals(item)) {
+//                            if (bag.isRightCollision(item)) {
+//                                return true;
+//                            }
+//                        }
+//                        if (checkWallCollision(bag,
+//                                RIGHT_COLLISION)) {
+//                            return true;
+//                        }
+//                    }
+//                    bag.move(SPACE, 0);
+//                }
+//            }
+//            return false;
+//
+//        } else if (type == TOP_COLLISION) {
+//
+//            for (int i = 0; i < mobs.size(); i++) {
+//
+//                Monsters bag = (Monsters) mobs.get(i);
+//                if (karakter.isTopCollision(bag)) {
+//                    for (int j = 0; j < mobs.size(); j++) {
+//
+//                        Monsters item = (Monsters) mobs.get(j);
+//                        if (!bag.equals(item)) {
+//                            if (bag.isTopCollision(item)) {
+//                                return true;
+//                            }
+//                        }
+//                        if (checkWallCollision(bag,
+//                                TOP_COLLISION)) {
+//                            return true;
+//                        }
+//                    }
+//                    bag.move(0, -SPACE);
+//                }
+//            }
+//
+//            return false;
+//
+//        } else if (type == BOTTOM_COLLISION) {
+//        
+//            for (int i = 0; i < mobs.size(); i++) {
+//
+//                Monsters bag = (Monsters) mobs.get(i);
+//                if (karakter.isBottomCollision(bag)) {
+//                    for (int j = 0; j < mobs.size(); j++) {
+//
+//                        Monsters item = (Monsters) mobs.get(j);
+//                        if (!bag.equals(item)) {
+//                            if (bag.isBottomCollision(item)) {
+//                                return true;
+//                            }
+//                        }
+//                        if (checkWallCollision(bag,
+//                                BOTTOM_COLLISION)) {
+//                            return true;
+//                        }
+//                    }
+//                    bag.move(0, SPACE);
+//                }
+//            }
+//        }
+//
+//        return false;
+//    }
+//
 
-        if (type == LEFT_COLLISION) {
-
-            for (int i = 0; i < baggs.size(); i++) {
-
-                Baggage bag = (Baggage) baggs.get(i);
-                if (soko.isLeftCollision(bag)) {
-
-                    for (int j=0; j < baggs.size(); j++) {
-                        Baggage item = (Baggage) baggs.get(j);
-                        if (!bag.equals(item)) {
-                            if (bag.isLeftCollision(item)) {
-                                return true;
-                            }
-                        }
-                        if (checkWallCollision(bag,
-                                LEFT_COLLISION)) {
-                            return true;
-                        }
-                    }
-                    bag.move(-SPACE, 0);
-                    isCompleted();
-                }
-            }
-            return false;
-
-        } else if (type == RIGHT_COLLISION) {
-
-            for (int i = 0; i < baggs.size(); i++) {
-
-                Baggage bag = (Baggage) baggs.get(i);
-                if (soko.isRightCollision(bag)) {
-                    for (int j=0; j < baggs.size(); j++) {
-
-                        Baggage item = (Baggage) baggs.get(j);
-                        if (!bag.equals(item)) {
-                            if (bag.isRightCollision(item)) {
-                                return true;
-                            }
-                        }
-                        if (checkWallCollision(bag,
-                                RIGHT_COLLISION)) {
-                            return true;
-                        }
-                    }
-                    bag.move(SPACE, 0);
-                    isCompleted();                   
-                }
-            }
-            return false;
-
-        } else if (type == TOP_COLLISION) {
-
-            for (int i = 0; i < baggs.size(); i++) {
-
-                Baggage bag = (Baggage) baggs.get(i);
-                if (soko.isTopCollision(bag)) {
-                    for (int j = 0; j < baggs.size(); j++) {
-
-                        Baggage item = (Baggage) baggs.get(j);
-                        if (!bag.equals(item)) {
-                            if (bag.isTopCollision(item)) {
-                                return true;
-                            }
-                        }
-                        if (checkWallCollision(bag,
-                                TOP_COLLISION)) {
-                            return true;
-                        }
-                    }
-                    bag.move(0, -SPACE);
-                    isCompleted();
-                }
-            }
-
-            return false;
-
-        } else if (type == BOTTOM_COLLISION) {
-        
-            for (int i = 0; i < baggs.size(); i++) {
-
-                Baggage bag = (Baggage) baggs.get(i);
-                if (soko.isBottomCollision(bag)) {
-                    for (int j = 0; j < baggs.size(); j++) {
-
-                        Baggage item = (Baggage) baggs.get(j);
-                        if (!bag.equals(item)) {
-                            if (bag.isBottomCollision(item)) {
-                                return true;
-                            }
-                        }
-                        if (checkWallCollision(bag,
-                                BOTTOM_COLLISION)) {
-                            return true;
-                        }
-                    }
-                    bag.move(0, SPACE);
-                    isCompleted();
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public void isCompleted() {
-
-        int num = baggs.size();
-        int compl = 0;
-
-        for (int i = 0; i < num; i++) {
-            Baggage bag = (Baggage) baggs.get(i);
-            for (int j = 0; j < num; j++) {
-                Area area = (Area) areas.get(j);
-                if (bag.x() == area.x()
-                        && bag.y() == area.y()) {
-                    compl += 1;
-                }
-            }
-        }
-
-        if (compl == num) {
-            completed = true;
-            repaint();
-        }
-    }
-
-    public void restartLevel() {
-
-        areas.clear();
-        baggs.clear();
-        walls.clear();
-        initWorld();
-        if (completed) {
-            completed = false;
-        }
-    }
+//    public void restartLevel() {
+//
+//        areas.clear();
+//        mobs.clear();
+//        walls.clear();
+//        initWorld();
+//        if (completed) {
+//            completed = false;
+//        }
+//    }
 }
 
