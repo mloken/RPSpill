@@ -4,6 +4,7 @@ import controller.JDBC;
 
 public class Monsters {
 	
+	public boolean turn;
 	public int id, level, hp, mp;
 	public int armour;
 	public int expReward = 0;
