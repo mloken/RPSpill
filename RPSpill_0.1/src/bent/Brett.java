@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
-public class Board extends JPanel { 
+public class Brett extends JPanel { 
 
     private final int OFFSET = 30;
     private final int SPACE = 20;
@@ -38,7 +38,7 @@ public class Board extends JPanel {
             + "    ##     #########\n"
             + "    ########\n";
 
-    public Board() {
+    public Brett() {
 
         addKeyListener(new TAdapter());
         setFocusable(true);

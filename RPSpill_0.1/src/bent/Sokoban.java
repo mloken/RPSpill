@@ -12,7 +12,7 @@ public final class Sokoban extends JFrame {
     }
 
     public void InitUI() {
-        Board board = new Board();
+        Brett board = new Brett();
         add(board);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

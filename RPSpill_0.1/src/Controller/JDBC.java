@@ -209,7 +209,6 @@ public class JDBC {
 			} 
 	}
 
-
 	public static boolean existingMonster(String name) {
 		String query = "SELECT name FROM monster WHERE monster.name = '" + name + "'";
 		return tryCatch(query);
@@ -242,10 +241,31 @@ public class JDBC {
 		return tryCatch(query);
 	}
 
-		// TODO Auto-generated method stub
-		
-	
-	
-	
+	public static void createMap(String level) {
+		if (existingMap(level)) {
+			System.out.println("Map already exists.");
+			return;
+		}
+		String query = "INSERT INTO maps values(null, '" + level + "')";
+		try {		
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RPGame?user=bent&password=bentpw");
+				stmt = conn.createStatement();
+				
+				stmt.executeUpdate(query);
+				System.out.println("\nMap created.\n");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	}
+
+	private static boolean existingMap(String level) {
+		String query = "SELECT stringLevel FROM maps WHERE maps.stringLevel = '" + level + "'";
+		return tryCatch(query);
+	}
 
 }
